@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/tooltip.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+
+</head>
+<body class="page">
+
+	<div class="section">
+		<div class="section__button" data-tooltip data-offset="10" data-pos="bottom" data-modclass="tooltip_mod1" data-text="Text">
+			Tooltip 1
+		</div>
+		<div class="section__button" data-tooltip data-offset="10" data-pos="top" data-modclass="tooltip_mod2" data-text="Text">
+			Tooltip 2
+		</div>
+		<div class="section__button" data-tooltip data-offset="10" data-pos="right" data-event="click" data-text="Text">
+			Tooltip 3
+		</div>
+		<div class="section__button" data-tooltip2>
+			Tooltip 4
+		</div>
+		<p>
+			<b>Тултип:</b>
+		</p>
+		<pre>
+			&lt;div data-tooltip data-offset="10" data-pos="right" data-event="click" data-modclass="Модификатор класса" data-text="Text"&gt;&lt;/div&gt;
+		</pre>
+		<p>
+			<b>По умолчанию:</b><br>
+			modClass: ''<br>
+			offset: 5<br>
+			close: true<br>
+			position: 'top'<br>
+		</p>
+		<p>
+			Можно создать отдельный экземпляр тултипа
+		</p>
+		<pre>
+			var tooltip = new Tooltip('tooltip');			// например, 'tooltip' - название класса тултипа
+			tooltip.init(element, {					// инициализация, element - тег, по координатам которого выведем тултип
+				modClass: '',					// класс модификатор, если нужно изменить внешний вид
+				offset: 5,					// смещение относительно элемента
+				close: true,					// кнопка закрытия по умолчанию выводится
+				position: 'top'					// по умолчанию выводится сверху
+			});
+			tooltip.html('text'); 					// текст, который надо вывести
+			tooltip.show(); 					// принудительно показываем на странице тултип
+			tooltip.update(); 					// обновляем координаты, если вдруг вставили новый текст
+			tooltip.close(); 					// закрываем тултип
+		</pre>
+		<p>
+			Пример кода на четвертой кнопке
+		</p>
+		<pre>
+		    var tooltip = new Tooltip('tooltip');
+
+			tooltip
+				.init(document.querySelector('[data-tooltip2]'), {
+					modClass: 'tooltip_mod4',
+					position: 'right',
+					offset: 10,
+					close: true
+				})
+				.html('Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem')
+				.show();
+
+		    setTimeout(function () {
+
+		        tooltip
+		            .html('Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem')
+		            .updatePosition();
+
+		    }, 2000);
+
+		    setTimeout(function () {
+
+		        tooltip.close();
+
+		        setTimeout(function() {
+
+		        	tooltip.show();
+
+		        }, 2000);
+
+		    }, 4000);
+		</pre>
+	</div>
+
+</body>
+</html>
