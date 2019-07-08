@@ -488,30 +488,45 @@
 
 		}, true);
 
+		var touchmoved;
+
+		// reset to default touchmoved
+		document.body.addEventListener('touchstart', function() {
+			touchmoved = false;
+		});
+
+		document.body.addEventListener('touchmove', function() {
+			touchmoved = true;
+		});
+
 		document.body.addEventListener(event, function (e) {
 
-			if (e.target.matches(initAttributesDefault)) {
+			if (!touchmoved) {
 
-				e.preventDefault();
+				if (e.target.matches(initAttributesDefault)) {
 
-				if (e.target.getAttribute('data-event') === 'click' || event === 'touchend') {
+					e.preventDefault();
 
-					var opts = {
-						modClass: e.target.getAttribute('data-modclass') || '',
-						position: e.target.getAttribute('data-pos') || 'top',
-						offset: parseInt(e.target.getAttribute('data-offset')) || 5,
-						close: true
-					};
+					if (e.target.getAttribute('data-event') === 'click' || event === 'touchend') {
 
-					tooltipElements
-						.init(e.target, opts)
-						.html(e.target.getAttribute('data-text'))
-						.show();
+						var opts = {
+							modClass: e.target.getAttribute('data-modclass') || '',
+							position: e.target.getAttribute('data-pos') || 'top',
+							offset: parseInt(e.target.getAttribute('data-offset')) || 5,
+							close: true
+						};
 
+						tooltipElements
+							.init(e.target, opts)
+							.html(e.target.getAttribute('data-text'))
+							.show();
+
+					}
+
+				} else {
+					tooltipElements.close();
 				}
 
-			} else {
-				tooltipElements.close();
 			}
 
 		}, true);
